@@ -1,0 +1,13 @@
+{
+  "name": "Exercicios",
+  "version": "1.0.0",
+  "description": "Pequenos exercícios de JavaScript para praticar.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Matheus Lima Roichman <roichmankill@gmail.com> (https://linktr.ee/Mathew_Dev)",
+  "license": "ISC"
+}
