@@ -1,27 +1,29 @@
 function convertTemp(temperatura, escalaOrigem, escalaDesejada) {
-	
-  const escalas = ['celsius', 'fahrenheit', 'kelvin']
-	
-  if ((!temperatura && temperatura !== 0) || !escalaOrigem || !escalaDesejada)  {
-	  return 'Informações inválidas!';
-  } else if (!escalas.includes(escalaOrigem) || !escalas.includes(escalaDesejada)) {
-  	return 'Escalas inválidas!'
-  } else {
-  	if (escalaOrigem === 'celsius' && escalaDesejada === 'fahrenheit') {
-  			return temperatura * 1.8 + 32;
-    }	else if (escalaOrigem === 'fahrenheit' && escalaDesejada === 'celsius') {
-  	  	return (temperatura - 32) / 1.8;
-    } else if (escalaOrigem === 'celsius' && escalaDesejada === 'kelvin') {
-  	  	return temperatura + 273.15;
-  	} else if (escalaOrigem === 'kelvin' && escalaDesejada === 'celsius') {
-  	    return temperatura - 273.15;
-  	} else if (escalaOrigem === 'fahrenheit' && escalaDesejada === 'kelvin') {
-  		return (temperatura - 32) / 1.8 + 273.15;
-  	} else { 
-  		return (temperatura - 273.15) * 1.8 + 32;
-  	};
-  };
-  
+
+	const command = {
+		'celsius': {
+			'fahrenheit': (temperatura) => temperatura * 1.8 + 32,
+			'kelvin': (temperatura) => temperatura + 273.15,
+		},
+		'fahrenheit': {
+			'celsius': (temperatura) => (temperatura - 32) / 1.8,
+			'kelvin': (temperatura) => (temperatura - 32) / 1.8 + 273.15,
+		},
+		'kelvin': {
+			'celsius': (temperatura) => temperatura - 273.15,
+			'fahrenheit': (temperatura) =>(temperatura - 273.15) * 1.8 + 32,
+		}
+	}
+
+	const convertToFunc = command[escalaOrigem]
+	if(!convertToFunc)throw new Error('Escala de Origem Inválida')
+
+	const converter = convertToFunc[escalaDesejada]
+	if(!converter)throw new Error('Escala de Desejada Inválida')
+
+	if(!temperatura && temperatura !== 0)throw new Error('Temperatura é requirida')
+	return converter(temperatura)
+
 };
 
 module.exports = convertTemp;

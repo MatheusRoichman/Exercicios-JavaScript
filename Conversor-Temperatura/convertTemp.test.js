@@ -29,9 +29,15 @@ test('13 Kelvin para Fahrenheit', () => {
 
 // Testes de falha
 test('Detecção de erro: Faltando parâmetros', () => {
-	expect(convertTemp(43, 'kelvin')).toBe('Informações inválidas!');
+	function testError(){
+		convertTemp(43, 'kelvin')
+	}
+	expect(testError).toThrowError('Escala de Desejada Inválida');
 });
 
 test('Detecção de erro: Escala inválida', () => {
-	expect(convertTemp(32, 'celso', 'kelvin')).toBe('Escalas inválidas!');
+	function testError(){
+		convertTemp(32, 'celso', 'kelvin')
+	}
+	expect(testError).toThrowError('Escala de Origem Inválida');
 });
