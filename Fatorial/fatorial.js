@@ -1,13 +1,8 @@
 const fatorial = n => {
   n = parseInt(n);
   
-  if (isNaN(n)) {
-    return 'Número inválido!';
-  } else if (n === 1) {
-    return 1;
-  } else if (n <= 0) {
-    return `${n}: Nulo ou negativo!`;
-  } 
+  if (n === 0 || n === 1) return 1;
+  if (n < 0 || isNaN(n)) return `Valor inválido!`;
   
   let arr = [];
   while (n > 1) {
